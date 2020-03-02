@@ -17,18 +17,18 @@ public class User {
     private int id;
 
     @Column(name = "username")
-    @Size ( max = 20, message = "username can be not more 20 symbols")
+    @Size ( max = 32, message = "username cant be more than 32 symbols")
     @NotBlank(message = "usernames field must be filled in")
     private String userName;
 
     @Column(name = "password")
-    @Size (min=6, max = 8, message = "password must be from 6 and before 8 symbols")
-    @NotBlank(message = "Passwords field  must be filled in")
+    @Size (min=6, max = 8, message = "password must be at least 6 and before 8 symbols")
+    @NotBlank(message = "passwords field  must be filled in")
     private String password;
 
     @Transient
     @Size (min=6, max = 8, message = "password must be from 6 and before 8 symbols")
-    @NotBlank(message = "Passwords field  must be filled in")
+    @NotBlank(message = "Please, confirm your password!")
     private String passwordConfirm;
 
     @ManyToMany
