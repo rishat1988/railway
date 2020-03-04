@@ -1,4 +1,4 @@
-package model;
+package com.model;
 
 
 import javax.persistence.*;
@@ -19,7 +19,7 @@ public class User {
     @Column(name = "username")
     @Size ( max = 32, message = "username cant be more than 32 symbols")
     @NotBlank(message = "usernames field must be filled in")
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     @Size (min=6, max = 8, message = "password must be at least 6 and before 8 symbols")
@@ -45,12 +45,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -84,7 +84,7 @@ return new HashSet <>();
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", userName='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", passwordConfirm='" + passwordConfirm + '\'' +
                 ", roles=" + roles +
