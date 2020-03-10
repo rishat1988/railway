@@ -16,9 +16,9 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
 @ComponentScan(basePackages = "com")
 @PropertySource("classpath:database.properties")
-@EnableTransactionManagement
 public class AppContext {
 
     @Autowired
@@ -32,6 +32,8 @@ public class AppContext {
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
+
+
 
     @Bean
     public DataSource dataSource() {

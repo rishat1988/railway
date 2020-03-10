@@ -4,5 +4,5 @@ import com.model.Role;
 
 public interface RoleDao   {
 
-    Role getByName(String Role);
+    Role getByName(String role);
 }

@@ -1,4 +1,6 @@
 package com.model;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -22,6 +24,7 @@ public class Passenger {
     private String surname;
 
     @Column (name = "date_of_birth")
+    @DateTimeFormat(pattern="yyyy-dd-MM")
     @NotBlank(message = "date of birth must be filled in")
     private Date dateOfBirth;
 

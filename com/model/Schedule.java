@@ -1,8 +1,11 @@
 package com.model;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -10,25 +13,32 @@ import java.util.Date;
 @Table(name = "schedule")
 public class Schedule {
 
-        @Id
-        @Column(name = "id")
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-        @Column (name = "train_id")
-        @NotBlank(message = "Numbers train must be filled in")
-        private Integer trainId;
+    @Column(name = "train_id")
+    @NotBlank(message = "Numbers train must be filled in")
+    private Integer trainId;
 
-    @Column (name = "station_id")
+    @Column(name = "station_id")
     @NotBlank(message = "station must be filled in")
     private Integer stationId;
 
-    @Column (name = "arrival_time")
+    @Column(name = "arrival_time")
+    @DateTimeFormat(pattern = "yyyy-dd-MM  HH:mm")
     @NotBlank(message = "Arrival time  must be filled in")
-    private Date arrivalDate;
+    private LocalDateTime arrivalTime;
+
+
+    @Column(name = "departure_time")
+    @DateTimeFormat(pattern = "yyyy-dd-MM  HH:mm")
+    @NotBlank(message = "Departure time  must be filled in")
+    private LocalDateTime departureTime;
 
     @Transient
-    private  String stationName;
+    private String stationName;
 
     public Schedule() {
     }
@@ -57,12 +67,20 @@ public class Schedule {
         this.stationId = stationId;
     }
 
-    public Date getArrivalDate() {
-        return arrivalDate;
+    public LocalDateTime getArrivalTime() {
+        return arrivalTime;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
-        this.arrivalDate = arrivalDate;
+    public void setArrivalTime(LocalDateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
     }
 
     public String getStationName() {
@@ -79,7 +97,8 @@ public class Schedule {
                 "id=" + id +
                 ", trainId=" + trainId +
                 ", stationId=" + stationId +
-                ", arrivalDate=" + arrivalDate +
+                ", arrivalTime=" + arrivalTime +
+                ", departureTime=" + departureTime +
                 ", stationName='" + stationName + '\'' +
                 '}';
     }

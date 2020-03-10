@@ -2,10 +2,14 @@ package com.service;
 
 import com.dao.RoleDao;
 import com.dao.UserDao;
+import com.model.Role;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,7 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(User user) {
-        user.setPassword(encodePassword(user.getPassword()));
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleDao.getByName("ROLE_USER"));
+        user.setRoles(roles);
         userDao.save(user);
     }
 
@@ -34,7 +40,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+
     public User findByUsername(String username) {
+
+
         return userDao.findByUsername(username);
     }
 
