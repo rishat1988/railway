@@ -18,9 +18,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findByUsername(String username) {
         Session session = sessionFactory.getCurrentSession();
-        Query<User> query = session.createQuery("from User where username = :username", User.class);
+        Query<User> query = session.createQuery(" FROM User u where u.username =:username", User.class);
         query.setParameter("username", username);
-        return query.list().stream().findAny().orElse(null);
+        return query.uniqueResult();
     }
 
     @Override

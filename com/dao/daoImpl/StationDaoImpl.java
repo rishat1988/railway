@@ -1,13 +1,17 @@
 package com.dao.daoImpl;
 
 import com.dao.StationDao;
+import com.model.Schedule;
 import com.model.Station;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.management.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -37,8 +41,14 @@ public class StationDaoImpl implements StationDao {
         return session.get(Station.class, id);
     }
     @Override
+    @SuppressWarnings("unchecked")
     public   List<Station> allStations(){
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Station").list();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Station> criteriaQuery = criteriaBuilder.createQuery(Station.class);
+        Root<Station> root = criteriaQuery.from(Station.class);
+        criteriaQuery.select(root);
+        Query query = session.createQuery(criteriaQuery);
+        return  query.getResultList();
     }
 }

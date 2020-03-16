@@ -15,6 +15,7 @@ public class RoleDaoImpl implements RoleDao {
     SessionFactory sessionFactory;
 
     @Override
+    @SuppressWarnings("unchecked")
     public Role getByName(String role) {
         Session session = sessionFactory.getCurrentSession();
         Query <Role> query = session.createQuery("from Role where name = :role" , Role.class);

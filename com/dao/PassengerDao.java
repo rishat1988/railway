@@ -14,7 +14,7 @@ public interface PassengerDao {
 
     Passenger getById(int id);
 
-    List allPassengers();
+    List<Passenger> allPassengers();
 
 
 }
