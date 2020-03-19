@@ -25,7 +25,7 @@ public class RegistrationController {
     private UserValidator userValidator;
 
 
-    @GetMapping ({"/login"})
+    @GetMapping ("/login")
 
     public String login (Model model){
         return "login";
@@ -55,15 +55,15 @@ public class RegistrationController {
     }
 
     @PostMapping("/signin")
-        public String signIn (@ModelAttribute("userForm") User userForm, BindingResult bindingResult){
-userValidator.validateUserAuth(userForm.getUsername(), userForm.getPassword(), bindingResult);
-if (bindingResult.hasErrors()){
-    return "signin";
-}
+        public String signIn (@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+        userValidator.validateUserAuth(userForm.getUsername(), userForm.getPassword(), bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "signin";
+        }
 securityService.autoLogin(userForm.getUsername(), userForm.getPassword());
 return  "redirect:/train/list"; //yet havnt train $)
-    }
 
+    }
     @GetMapping ("/logout")
     public  String logout (Model model){
         return  "redirect:/login";

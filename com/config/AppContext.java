@@ -18,7 +18,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com")
-@PropertySource("classpath:database.properties")
+@PropertySource(value = "classpath:database.properties")
 public class AppContext {
 
     @Autowired
